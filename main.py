@@ -4,8 +4,6 @@
 import sys
 import pygame
 
-import random
-
 from constants import *
 from circleshape import CircleShape
 
@@ -52,6 +50,14 @@ def main():
 
         for element in updatable:
             element.update(dt)
+
+        for shot in shots:
+            for asteroid in asteroids:
+                if shot.collides_with(asteroid):
+                    print("Asteroid hit!")
+                    shot.kill()
+                    asteroid.breaks()
+                    break
 
         for element in asteroids:
             if player.collides_with(element):

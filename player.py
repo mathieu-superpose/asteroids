@@ -4,8 +4,6 @@ from constants import (
     PLAYER_RADIUS,
     PLAYER_TURN_SPEED,
     PLAYER_SPEED,
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
     PLAYER_SHOOT_SPEED,
     PLAYER_COOLDOWN,
 )
@@ -43,12 +41,13 @@ class Player(CircleShape):
             return None
 
         self.timer = PLAYER_COOLDOWN
+
         shot = Shot(self.position.x, self.position.y, self.rotation)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
-        
+
         self.timer -= dt
 
         # FORWARD MOVEMENT
