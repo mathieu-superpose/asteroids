@@ -1,6 +1,7 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
+import sys
 import pygame
 
 import random
@@ -48,6 +49,13 @@ def main():
 
         for element in updatable:
             element.update(dt)
+
+        for element in asteroids:
+            if player.collides_with(element):
+                print("Game Over!")
+                pygame.display.quit()
+                pygame.quit()
+                sys.exit()
 
         for element in drawable:
             element.draw(screen)
