@@ -3,10 +3,14 @@
 # throughout this file
 import pygame
 
+import random
+
 from constants import *
 from circleshape import CircleShape
 
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -19,12 +23,21 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # GROUPS
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
+    # Class Groups
+    Player.containers = drawable, updatable
+    Asteroid.containers = asteroids, drawable, updatable
+    AsteroidField.containers = updatable
+
+    # CREATE PLAYER
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    updatable.add(player)
-    drawable.add(player)
+
+    # CREATE ASTEROID FIELD
+    asteroid_field = AsteroidField()
 
     while True:
         for event in pygame.event.get():
